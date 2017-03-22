@@ -52,15 +52,36 @@ def encode(num, base):
 
 
 
+def switch_num(str_num):
+    start_switch = False
+    for index in range(len(list(str_num)):
+        if str_num[index] == 1 or start_switch == True:
+            start_switch = True
+            if str_num[index] == 1:
+                str_num[index] -= 1
+            elif: str_num[index] == 0:
+                str_num[index] += 1
+    return 
+
+
+
 
 
 def convert(str_num, base1, base2):
     """
     Convert given number from base1 to base2.
     """
-    base_ten = decode(str_num, base1) #change base1 number to base 10
-    converted_base = encode(base_ten, base2) #change base10 number to base2
-    return converted_base
+    if str_num >= 0:
+        base_ten = decode(str_num, base1) #change base1 number to base 10
+        converted_base = encode(base_ten, base2) #change base10 number to base2
+        return converted_base
+    elif str_num < 0:
+        str_num_pos = str_num * -1 #Make number positive
+        base_ten = decode(str_num, base1) #change base1 number to base 10
+        converted_base = encode(base_ten, base2) #change base10 number to base2
+        for index in converted_base:
+
+
 
 
 def main():
