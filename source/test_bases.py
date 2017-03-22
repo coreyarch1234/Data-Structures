@@ -31,8 +31,8 @@ class BasesTest(unittest.TestCase):
         assert decode('234', 5) == 69
         assert decode('246', 8) == 166
         assert decode('864', 10) == 864
-        assert decode('cab', 16) == 3243
-        assert decode('cat', 32) == 12637
+        assert decode('CAB', 16) == 3243
+        assert decode('CAT', 32) == 12637
 
     def test_encode(self):
         assert encode(10, 2) == '1010'
@@ -41,8 +41,8 @@ class BasesTest(unittest.TestCase):
         assert encode(10, 5) == '20'
         assert encode(10, 8) == '12'
         assert encode(10, 10) == '10'
-        assert encode(10, 16) == 'a'
-        assert encode(10, 32) == 'a'
+        assert encode(10, 16) == 'A'
+        assert encode(10, 32) == 'A'
 
         assert encode(100, 2) == '1100100'
         assert encode(100, 3) == '10201'
@@ -59,8 +59,8 @@ class BasesTest(unittest.TestCase):
         assert encode(1234, 5) == '14414'
         assert encode(1234, 8) == '2322'
         assert encode(1234, 10) == '1234'
-        assert encode(1234, 16) == '4d2'
-        assert encode(1234, 32) == '16i'
+        assert encode(1234, 16) == '4D2'
+        assert encode(1234, 32) == '16I'
 
     def test_convert(self):
         assert convert('1010', 2, 3) == '101'
@@ -76,12 +76,12 @@ class BasesTest(unittest.TestCase):
         assert convert('77', 8, 2) == '111111'
         assert convert('77', 8, 4) == '333'
         assert convert('77', 8, 10) == '63'
-        assert convert('77', 8, 16) == '3f'
+        assert convert('77', 8, 16) == '3F'
 
-        assert convert('ff', 16, 2) == '11111111'
-        assert convert('ff', 16, 4) == '3333'
-        assert convert('ff', 16, 8) == '377'
-        assert convert('ff', 16, 10) == '255'
+        assert convert('FF', 16, 2) == '11111111'
+        assert convert('FF', 16, 4) == '3333'
+        assert convert('FF', 16, 8) == '377'
+        assert convert('FF', 16, 10) == '255'
 
 
 if __name__ == '__main__':
