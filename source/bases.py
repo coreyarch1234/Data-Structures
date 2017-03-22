@@ -53,15 +53,33 @@ def encode(num, base):
 
 
 def switch_num(str_num):
-    start_switch = False
-    for index in range(len(list(str_num)):
-        if str_num[index] == 1 or start_switch == True:
-            start_switch = True
-            if str_num[index] == 1:
-                str_num[index] -= 1
-            elif: str_num[index] == 0:
-                str_num[index] += 1
-    return 
+    start_index = 0
+    str_num = list(str_num[::-1])
+    while len(str_num) % 4 != 0:
+        str_num.append("0")
+    for index in range(len(str_num)):
+        # print str_num[index]
+        if str_num[index] == "1":
+            # print("hello")
+            start_index = index
+            # print start_index
+            break
+
+    for updated_index in range(start_index + 1, len(str_num)):
+        if str_num[updated_index] == "1":
+            # print "string = 1"
+            # print str_num
+            str_num[updated_index] = "0"
+            # print str_num
+            # print str_num[updated_index]
+        elif str_num[updated_index] == "0":
+            # print "string = 0"
+            # print str_num
+            str_num[updated_index] = "1"
+            # print str_num
+
+    return "1 1 1 1 " + " ".join(reversed(str_num))
+
 
 
 
@@ -71,15 +89,17 @@ def convert(str_num, base1, base2):
     """
     Convert given number from base1 to base2.
     """
-    if str_num >= 0:
+    if int(str_num) == 0:
+        return "0000"
+    if int(str_num) > 0:
         base_ten = decode(str_num, base1) #change base1 number to base 10
         converted_base = encode(base_ten, base2) #change base10 number to base2
         return converted_base
-    elif str_num < 0:
-        str_num_pos = str_num * -1 #Make number positive
-        base_ten = decode(str_num, base1) #change base1 number to base 10
+    elif int(str_num) < 0:
+        str_num_pos = str(int(str_num) * -1) #Make number positive
+        base_ten = decode(str_num_pos, base1) #change base1 number to base 10
         converted_base = encode(base_ten, base2) #change base10 number to base2
-        for index in converted_base:
+        return switch_num(converted_base)
 
 
 
@@ -95,7 +115,9 @@ def main():
         print('{} in base {} is {} in base {}'.format(str_num, base1, result, base2))
     else:
         # print('Usage: {} number base1 base2'.format(sys.argv[0]))
-        return "hello"
+        str_num = args[0]
+        result = switch_num(str_num)
+        print(result)
 
 
 if __name__ == '__main__':
