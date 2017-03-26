@@ -10,22 +10,39 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
-    # TODO: implement the is_palindrome function iteratively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_iterative
-    # to verify that your iterative implementation passes all tests
+    text = text.lower() #check for casing
+    text = text.replace(" ", "") #check for whitespaces
+    text = text.translate(None, string.punctuation) #check for punctuation
+    if text == '':
+        return True
+    if len(text) == 1:
+        return True
+    while len(text) > 1: #if the text is more than one character long, there are still more to check
+        if text[-1] == text[0]: #if the first and last chars are equal
+            text = text[1:-1] #cut off the first and last chars and make a new string
+        else:
+            return False #the start and end of text is unequal and this is not a palindrome
+    return True
 
 
 def is_palindrome_recursive(text, left=None, right=None):
-    # TODO: implement the is_palindrome function recursively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_recursive
-    # to verify that your iterative implementation passes all tests
+    #base case 1 - there is a blank string
+    text = text.lower() #check for casing
+    text = text.replace(" ", "") #check for whitespaces
+    text = text.translate(None, string.punctuation) #check for punctuation
+    if text == '':
+        return True
+    #base case 2 - the text is one char long
+    if len(text) == 1:
+        return True
+    #recursive call. check start and end of text and if they are equal, check again and again until text is one character long
+    #if text is of length one, text is a palindrome
+    return text[0] == text[-1] and is_palindrome_recursive(text[1:-1])
 
 
 def main():
