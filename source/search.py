@@ -35,15 +35,33 @@ def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    # return binary_search_iterative(array, item)
-    return binary_search_recursive(array, item)
+    return binary_search_iterative(array, item)
+    # return binary_search_recursive(array, item)
 
 
 def binary_search_iterative(array, item):
-    # TODO: implement binary search iteratively here
-    pass
-    # once implemented, change binary_search to call binary_search_iterative
-    # to verify that your iterative implementation passes all tests below
+    left = 0 #Start of list
+    right = len(array) - 1 #End of list
+    item_found = False
+    while item_found is not True:
+        diff = right - left
+        if diff <= 1: #Meaning the right and left are consecutive, in which case there are no more cases to check
+            if array[right] == item: #The item must be either at the right or left unless it does not exist.
+                return right
+            elif array[left] == item:
+                return left
+            else:  # if array[right] != item and array[left] != item:
+                return None
+        middle = (left + right) / 2
+        if array[middle] == item:
+            item_found = True
+        elif item > array[middle]:
+            # left += half
+            left = middle
+        elif item < array[middle]:
+            # right -= half
+            right = middle
+    return middle
 
 
 def binary_search_recursive(array, item, left=None, right=None):
@@ -67,9 +85,9 @@ def binary_search_recursive(array, item, left=None, right=None):
             return left
         else:  # if array[right] != item and array[left] != item:
             return None
-    half = diff/2
-    middle = left + half
-    # middle = (left + right) / 2
+    # half = diff/2
+    # middle = left + half
+    middle = (left + right) / 2
     if array[middle] == item:
         return middle
     elif item > array[middle]:
@@ -114,8 +132,6 @@ def main():
         # result = linear_search_recursive(array, item)
         # linear_search_recursive(array, item)
         result = binary_search(array, item)
-
-
         print(result)
         # print('factorial({}) => {}'.format(num, result))
     else:
