@@ -35,10 +35,7 @@ def is_palindrome_recursive(text, left=None, right=None):
     text = text.lower() #check for casing
     text = text.replace(" ", "") #check for whitespaces
     text = text.translate(None, string.punctuation) #check for punctuation
-    if text == '':
-        return True
-    #base case 2 - the text is one char long
-    if len(text) == 1:
+    if len(text) <= 1: #edge case
         return True
     #recursive call. check start and end of text and if they are equal, check again and again until text is one character long
     #if text is of length one, text is a palindrome

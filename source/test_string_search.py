@@ -32,7 +32,7 @@ class TestStringSearch(unittest.TestCase):
 
     def test_is_pattern_in_case_punctuation_whitespacing_string(self):
 
-        assert string_contains_pattern('hel LLL !o', 'LL !') is True
+        assert string_contains_pattern('hel LLL !o', 'LL !') is True #Mirror Case
         assert string_contains_pattern('f i b!.?!.bo na  i', 'b!.') is True
         assert string_contains_pattern('o nel.! ? ve onewo rld', 'rld') is True
 
