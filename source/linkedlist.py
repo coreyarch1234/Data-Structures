@@ -120,13 +120,14 @@ class LinkedList(object):
         if self.is_empty():
             # Assign head to new node
             self.head = new_node
-            self.size += 1
+            # self.size += 1
         else:
             # Otherwise insert new node after tail
             self.tail.next = new_node
-            self.size += 1
+            # self.size += 1
         # Update tail to new node regardless
         self.tail = new_node
+        self.size += 1
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list"""
@@ -136,13 +137,14 @@ class LinkedList(object):
         if self.is_empty():
             # Assign tail to new node
             self.tail = new_node
-            self.size += 1
+            # self.size += 1
         else:
             # Otherwise insert new node before head
             new_node.next = self.head
-            self.size += 1
+            # self.size += 1
         # Update head to new node regardless
         self.head = new_node
+        self.size += 1
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError"""
