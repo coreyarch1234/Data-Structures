@@ -22,12 +22,15 @@ class LinkedStack(object):
     def is_empty(self):
         """Return True if this stack is empty, or False otherwise"""
         # TODO: Check if empty
-        return self.list.isEmpty #Linked List isEmpty method
+        return self.list.is_empty() #Linked List isEmpty method
 
     def length(self):
         """Return the number of items in this stack"""
         # TODO: Count number of items
-        return self.list.length
+        if self.list.is_empty() == False:
+            return self.list.length()
+        else:
+            return 0
 
     def push(self, item):
         """Insert the given item on the top of this stack"""
@@ -38,7 +41,10 @@ class LinkedStack(object):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty"""
         # TODO: Return top item, if any
-        return self.list.get_at_index(0) #get first element and return it
+        if self.list.is_empty() == False:
+            return self.list.get_at_index(0) #get first element and return it
+        else:
+            return None
 
     def pop(self):
         """Remove and return the item on the top of this stack,
@@ -97,3 +103,20 @@ class ArrayStack(object):
 # to use each of your Stack implementations to verify they each pass all tests
 Stack = LinkedStack
 # Stack = ArrayStack
+
+def main():
+    import sys
+    args = sys.argv[1:]  # Ignore script file name
+    if len(args) == 0:
+        # s = Stack(['A', 'B', 'C'])
+        s = LinkedStack(['A', 'B', 'C'])
+        # print s.peek()
+        # print s.length()
+        print s.is_empty()
+        # print s
+    else:
+        print('hello')
+
+
+if __name__ == '__main__':
+    main()
