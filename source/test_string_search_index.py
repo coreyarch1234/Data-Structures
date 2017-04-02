@@ -36,13 +36,6 @@ class TestStringSearch(unittest.TestCase):
         assert string_contains_pattern_index('f i b!.?!.bo na  i', 'b!.') is 4
         assert string_contains_pattern_index('o nel.! ? ve onewo rld', 'rld') is 19
 
-    def test_is_pattern_not_in_string(self):
-
-        assert string_contains_pattern_index('hello', 'hell o') is False
-        assert string_contains_pattern_index('fibbci', 'bbon') is False
-        assert string_contains_pattern_index('onelovrld', 'elovd') is False
-
-
 
 if __name__ == '__main__':
     unittest.main()

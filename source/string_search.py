@@ -1,10 +1,6 @@
 import string
 
 def string_contains_pattern(text, pattern):
-    """A string of characters is a palindrome if it reads the same forwards and
-    backwards, ignoring punctuation, whitespace, and letter casing"""
-    # implement is_palindrome_iterative and is_palindrome_recursive below, then
-    # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str)
     return string_contains_pattern_iterative(text, pattern) or string_contains_pattern_reverse_iterative(text, pattern)
     # return (string_contains_pattern_recursive(text, pattern) or string_contains_pattern_reverse_recursive(text, pattern))

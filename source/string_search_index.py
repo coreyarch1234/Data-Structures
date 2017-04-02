@@ -1,87 +1,36 @@
 import string
 
 def string_contains_pattern_index(text, pattern):
-    """A string of characters is a palindrome if it reads the same forwards and
-    backwards, ignoring punctuation, whitespace, and letter casing"""
-    # implement is_palindrome_iterative and is_palindrome_recursive below, then
-    # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str)
-    return string_contains_pattern_iterative_index(text, pattern)
+    return string_contains_pattern_index_recursive(text, pattern)
+    # return string_contains_pattern_index_iterative(text, pattern)
 
-def string_contains_pattern_iterative_reverse_index(text, pattern):
-    #base case 1 - text and pattern are the same string
-    text = text[::-1] # reverse text
-    pattern = pattern[::-1] #reverse pattern
-    temp_text_count = 0
-    if text == pattern:
-        return 0
-    if len(text) < len(pattern):
-        return False
-    index = 0
-    pattern_count = 0
-    while len(text) >= len(pattern):
-        temp_text_count += 1
-        if pattern[index] == text[index]:
-            if pattern_count == len(pattern):
-                return temp_text_count - len(pattern)
-            pattern_count += 1
-            index += 1
-        else:
 
-            text = text[index + 1:]
-            index = 0
-            if pattern[index] == text[index]:
-                pattern_count = 0
-            else:
-                pattern_count = 1
-        if pattern_count == len(pattern):
+def string_contains_pattern_index_iterative(text, pattern):
+    for i in range(0, len(text) - len(pattern) + 1): #7
+        j = len(pattern) + i # 5
+        if text[i:j] == pattern:
+            return i
+    return None
 
-            # temp_text_count += 1
-            return temp_text_count - len(pattern)
-    return False
-
-def string_contains_pattern_iterative_index(text, pattern):
-    #base case 1 - text and pattern are the same string
-    temp_text_count = 0
-    if text == pattern:
-        return 0
-    if len(text) < len(pattern):
-        return False
-    index = 0
-    pattern_count = 0
-    while len(text) >= len(pattern):
-        temp_text_count += 1
-        # print(temp_text_count)
-        if pattern[index] == text[index]:
-            if pattern_count == len(pattern):
-                return temp_text_count - len(pattern)
-            pattern_count += 1
-            index += 1
-        else:
-            
-            text = text[index + 1:]
-            index = 0
-            if pattern[index] == text[index]:
-                pattern_count = 1
-            else:
-                pattern_count = 0
-        # print(pattern_count)
-        if pattern_count == len(pattern):
-            # temp_text_count += 1
-            print("weird")
-            return temp_text_count - len(pattern)
-    if string_contains_pattern_iterative_reverse_index(text, pattern) == False:
-        return False
-    else:
-        # print("weird")
-        return string_contains_pattern_iterative_reverse_index(text, pattern)
+def string_contains_pattern_index_recursive(text, pattern, count=0):
+    counter = count
+    if len(text) <= len(pattern):
+        return counter
+    for index in range(len(pattern)): #run through the length of the pattern
+        if pattern == text[0:len(pattern)]: #if the respective letters of the text and pattern are equal, check the next
+            return counter
+        else: #if they are not equal, then run this method again with the text starting at the next letter.
+            counter += 1
+            return string_contains_pattern_index_recursive(text[index + 1:], pattern, count=counter)
+    return None
 
 
 def main():
     import sys
     args = sys.argv[1:]  # Ignore script file name
     if len(args) == 0:
-        print(string_contains_pattern_index('f i b!.?!.bo na  i', 'b!.'))
+        print(string_contains_pattern_index('hel LLL !o', 'LL !'))
 
     else:
         print('hello')
