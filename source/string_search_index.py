@@ -7,10 +7,10 @@ def string_contains_pattern_index(text, pattern):
 
 
 def string_contains_pattern_index_iterative(text, pattern):
-    for i in range(0, len(text) - len(pattern) + 1): #7
-        j = len(pattern) + i # 5
-        if text[i:j] == pattern:
-            return i
+    for index in range(0, len(text) - len(pattern) + 1): #7
+        length = len(pattern) + index # 5
+        if text[index:length] == pattern:
+            return index
     return None
 
 def string_contains_pattern_index_recursive(text, pattern, count=0):
