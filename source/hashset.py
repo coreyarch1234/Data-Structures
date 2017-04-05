@@ -124,14 +124,15 @@ class HashSet(object):
                 difference_set.add(element)
         return difference_set
 
-    def difference(self, second_set): #Assume the second set is of type, HashSet
-        """Return the difference of the current set and the second set, don't update this set difference
-        of A and B is the elements in B that are not in A"""
-        difference_set = HashSet() #union set to be filled
+    def is_subset(self, second_set): #Assume the second set is of type, HashSet
+        """Return True if second_set if a subset of current set. False otherwise."""
+        isSubset = False
         for element in second_set.keys():
-            if element not in self.keys(): #if they have the same element
-                difference_set.add(element)
-        return difference_set
+            if element in self.keys(): #if they have the same element
+                continue
+            else:
+                return isSubset
+        return True
 
     def keys(self):
         """Return a list of all keys in this hash table"""
@@ -186,13 +187,14 @@ class HashSet(object):
 
 
 def test_hash_table():
-    h_one = HashSet()
-    h_two = HashSet()
-    h_one.add("A")
-    h_one.add("B")
-    h_two.add("C")
-    h_difference = h_one.difference(h_two)
-    print(h_difference)
+    h_one = HashSet(["A", "B", "C", "1"])
+    h_two = HashSet(["A", "2"])
+    print(h_one.is_subset(h_two))
+    # h_one.add("A")
+    # h_one.add("B")
+    # h_two.add("C")
+    # h_difference = h_one.difference(h_two)
+    # print(h_difference)
     # print(h_one)
     # h_union = h_one.union(h_two)
     # print(h_one)
