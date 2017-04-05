@@ -10,6 +10,9 @@ class HashSet(object):
         # init_size=8
         self.buckets = [LinkedList() for i in range(8)]
         self.size = 0  # Count number of key-value entries
+        if elements:
+            for element in elements:
+                self.add(element)
 
     def __str__(self):
         """Return a formatted string representation of this hash table"""
@@ -112,6 +115,24 @@ class HashSet(object):
                 intersection_set.add(element)
         return intersection_set
 
+    def difference(self, second_set): #Assume the second set is of type, HashSet
+        """Return the difference of the current set and the second set, don't update this set difference
+        of A and B is the elements in B that are not in A"""
+        difference_set = HashSet() #union set to be filled
+        for element in second_set.keys():
+            if element not in self.keys(): #if they have the same element
+                difference_set.add(element)
+        return difference_set
+
+    def difference(self, second_set): #Assume the second set is of type, HashSet
+        """Return the difference of the current set and the second set, don't update this set difference
+        of A and B is the elements in B that are not in A"""
+        difference_set = HashSet() #union set to be filled
+        for element in second_set.keys():
+            if element not in self.keys(): #if they have the same element
+                difference_set.add(element)
+        return difference_set
+
     def keys(self):
         """Return a list of all keys in this hash table"""
         # Collect all keys in each of the buckets
@@ -168,14 +189,18 @@ def test_hash_table():
     h_one = HashSet()
     h_two = HashSet()
     h_one.add("A")
-    h_two.add("B")
-    h_union = h_one.union(h_two)
-    print(h_one)
-    print(h_two)
-    print(h_union)
-    h_two.add("A")
-    h_intersection = h_one.intersection(h_two)
-    print(h_intersection)
+    h_one.add("B")
+    h_two.add("C")
+    h_difference = h_one.difference(h_two)
+    print(h_difference)
+    # print(h_one)
+    # h_union = h_one.union(h_two)
+    # print(h_one)
+    # print(h_two)
+    # print(h_union)
+    # h_two.add("A")
+    # h_intersection = h_one.intersection(h_two)
+    # print(h_intersection)
 
     # ht = HashTable(4)
     # print('HashTable: ' + str(ht))
