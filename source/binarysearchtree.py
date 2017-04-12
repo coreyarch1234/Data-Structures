@@ -157,57 +157,28 @@ class BinarySearchTree(object):
             # TODO: Increase the tree size
         self.size += 1
 
-    def delete(self, item):
-        """Delete the given item in this binary search tree"""
-        node = self._find_node(item)
-        node_parent = self._find_parent_node(item)
-        count_children = 0
-        if node is not None:
-            if node.left is not None:
-                count_children += 1
-            if node.right is not None:
-                count_children += 1
-        #case 1 is where the node has no count_children. Look for node and set it's parent's left or right child to None
-        if count_children == 0:
-            if node_parent.left is not None:
-                node_parent.left = None
-            if node_parent.right is not None:
-                node_parent.right = None
-        # if the parent is the root node, clear its data
-        self.data = None
-
-        #case where the node has 1 children. Make parent's left or right child equal to the node's left or right child. Basically, replace node with its child.
-        if count_children == 1:
-            if node.left is not None:
-                replacement_node = node.left
-            elif node.right is not None:
-                replacement_node = node.right
-            if node_parent.left == node:
-                node_parent.left = replacement_node
-            elif node_parent.right == node:
-                node_parent.right = node
-            if node == self.root:
-                node = replacement_node
-        
 
 
-    def items_in_order(self, node=True, items=None):
+
+
+    def items_in_order(self, node=None, items=None):
         """Return a list of all items in this binary search tree found using
         in-order traversal starting at the given node after the given items"""
         # Set up starting node and items list if not given
-        if node is True:
-            node = self.root
-        if items is None:
+        if items is None and node is None:
             items = list()
-        print 'helloworld'
-        print items
-
+            node = self.root
         if node is not None: #if the node is empty, return
             self.items_in_order(node.left, items) #check the left of the node and if it does not exist, move on to append and check right.
             items.append(node.data) #'visit'
             self.items_in_order(node.right, items) #check right and if it doesn not exist, return with visit
         # Return the items list to the original caller
         return items
+
+    def sort_items_in_order(self):
+        sorted_list = self.items_in_order()
+        return sorted_list
+
 
     def items_pre_order(self, node=True, items=None):
         """Return a list of all items in this binary search tree found using
@@ -223,6 +194,7 @@ class BinarySearchTree(object):
             self.items_pre_order(node.left, items)
             self.items_pre_order(node.right, items)
         return items
+
 
     def items_post_order(self, node=True, items=None):
         """Return a list of all items in this binary search tree found using
@@ -242,60 +214,121 @@ class BinarySearchTree(object):
     def items_level_order(self):
         """Return a list of all items in this binary search tree found using
         level-order traversal"""
-        # TODO: Create a queue to store nodes not yet traversed in level-order
         queue = LinkedQueue()
         # Create an items list
         items = list()
-        # TODO: Enqueue the root node if this tree is not empty
-        if self.is_empty() == False:
+        if self.is_empty() is False:
             queue.enqueue(self.root)
-        # TODO: Loop until the queue is empty
-        while queue.is_empty() == False:
-            # TODO: Dequeue the node at the front of the queue
+        while queue.is_empty() is False:
             node = queue.dequeue()
-            # TODO: Add this node's data to the items list
             items.append(node.data)
-            # TODO: Enqueue this node's left child if it exists
             if node.left is not None:
                 queue.enqueue(node.left)
-            # TODO: Enqueue this node's right child if it exists
             if node.right is not None:
                 queue.enqueue(node.right)
         # Return the items list
         return items
 
 
+
+    # def delete(self, item):
+    #     """Delete the given item in this binary search tree"""
+    #     node = self._find_node(item)
+    #     node_parent = self._find_parent_node(item)
+    #     count_children = 0
+    #     if node is not None:
+    #         if node.left is not None:
+    #             count_children += 1
+    #         if node.right is not None:
+    #             count_children += 1
+    #     #case 1 is where the node has no count_children. Look for node and set it's parent's left or right child to None
+    #     if count_children == 0:
+    #         if node_parent.left is node: #If the parent's left child is the node to be deleted.
+    #             node_parent.left = None
+    #             self.size -= 1
+    #         if node_parent.right is node: #If the parent's right child is the node to be deleted.
+    #             node_parent.right = None
+    #             self.size -= 1
+    #         if node_parent is self.root:
+    #             self.root = None
+    #             self.size -= 1
+    #     # if the parent is the root node, clear its data
+    #
+    #
+    #     #case where the node has 1 children. Make parent's left or right child equal to the node's left or right child. Basically, replace node with its child.
+    #     if count_children == 1:
+    #         if node.left is not None:
+    #             replacement_node = node.left
+    #         elif node.right is not None:
+    #             replacement_node = node.right
+    #         if node_parent.left == node:
+    #             node_parent.left = replacement_node
+    #         elif node_parent.right == node:
+    #             node_parent.right = replacement_node
+    #         self.size -= 1
+    #         # del node
+    #         if node == self.root:
+    #             node = replacement_node
+    #             self.size -= 1
+    #     #case where the node has 2 children. Locate the node and find it's rightmost descendent in the left subtree relative to it. Then replace the node
+    #     #with that rightmost node and
+    #     if count_children == 2:
+    #         if node.left is not None:
+    #             replacement_node = node.left
+    #             while replacement_node.right is not None: #get the rightmost node on the left subtree of the node to be deleted
+    #                 replacement_node = replacement_node.right
+    #             if node_parent.left == node:
+    #                 node_parent.left = replacement_node
+    #             elif node_parent.right == node:
+    #                 node_parent.right = replacement_node
+    #             del replacement_node
+    #             self.size -= 1
+    #         elif node.left is None:
+    #             replacement_node = node.right
+    #             while replacement_node is not None:
+    #                 replacement_node = replacement_node.left
+    #             if node_parent.left == node:
+    #                 node_parent.left = replacement_node
+    #             elif node_parent.right == node:
+    #                 node_parent.right = replacement_node
+    #             del replacement_node
+    #             self.size -= 1
+
+
+
 def test_binary_search_tree():
 
-     # Create a complete binary search tree of 3, 7, or 15 items in level-order
+    # Create a complete binary search tree of 3, 7, or 15 items in level-order
     # items = [2, 1, 3]
-    items = [4, 2, 6, 1, 3, 5, 7]
     # items = [8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15]
-    print('items: ' + str(items))
-
-    bst = BinarySearchTree()
-    print('tree: ' + str(bst))
-    print('root: ' + str(bst.root))
-
-    print('\nInserting items:')
-    for item in items:
-        bst.insert(item)
-        # print('insert({})'.format(item))
-        print('insert({}), size: {}'.format(item, bst.size))
-        # print(bst)
-    print('root: ' + str(bst.root))
-
-    print('\nSearching for items:')
-    for item in items:
-        result = bst.search(item)
-        print('search({}): {}'.format(item, result))
-    item = 123
-    result = bst.search(item)
-    print('search({}): {}'.format(item, result))
-    print(bst)
-
-    print('\nTraversing items:')
-    print('items in-order:    ' + str(bst.items_in_order()))
+    # print('items: ' + str(items))
+    #
+    bst = BinarySearchTree([54,26,93,17,77,31,44,55,20])
+    print(bst.sort_items_in_order())
+    # items = [4, 2, 6, 1, 3, 5, 7]
+    # print(bst.sort_items_in_order(items))
+    # print('tree: ' + str(bst))
+    # print('root: ' + str(bst.root))
+    #
+    # print('\nInserting items:')
+    # for item in items:
+    #     bst.insert(item)
+    #     # print('insert({})'.format(item))
+    #     print('insert({}), size: {}'.format(item, bst.size))
+    #     # print(bst)
+    # print('root: ' + str(bst.root))
+    #
+    # print('\nSearching for items:')
+    # for item in items:
+    #     result = bst.search(item)
+    #     print('search({}): {}'.format(item, result))
+    # item = 123
+    # result = bst.search(item)
+    # print('search({}): {}'.format(item, result))
+    # print(bst)
+    #
+    # print('\nTraversing items:')
+    # print('items in-order:    ' + str(bst.items_in_order()))
     # print('items pre-order:   ' + str(bst.items_pre_order()))
     # print('items post-order:  ' + str(bst.items_post_order()))
     # print('items level-order: ' + str(bst.items_level_order()))
