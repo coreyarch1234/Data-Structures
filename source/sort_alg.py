@@ -41,6 +41,7 @@ def selection_sort(input_list):
                 smallest = input_list[index]
                 input_list.pop(index)
                 input_list.insert(0, smallest)
+                #swap instead of popping
     return input_list
 
 def insertion_sort(input_list):
@@ -56,9 +57,59 @@ def insertion_sort(input_list):
         input_list[location] = current
     return input_list
 
+def counting_sort(input_list, max_val):
+    # list of 0's at indices 0...max_value
+    number_counts = [0] * (max_val + 1)
 
+    # populate num_counts
+    for element in input_list:
+        number_counts[element] += 1
 
+    # populate the final sorted list
+    sorted_list = []
 
+    # for each item in num_counts
+    for element, count in enumerate(number_counts):
+
+        # for the number of times the item occurs
+        for time in range(count):
+
+            # add it to the sorted list
+            sorted_list.append(element)
+
+    return sorted_list
+
+def mergeSort(input_list):
+    if len(input_list)>1:
+
+        mid = len(input_list)//2
+        lefthalf = input_list[:mid]
+        righthalf = input_list[mid:]
+
+        mergeSort(lefthalf)
+        mergeSort(righthalf)
+
+        i=0
+        j=0
+        k=0
+        while i < len(lefthalf) and j < len(righthalf):
+            if lefthalf[i] < righthalf[j]:
+                input_list[k]=lefthalf[i]
+                i=i+1
+            else:
+                input_list[k]=righthalf[j]
+                j=j+1
+            k=k+1
+
+        while i < len(lefthalf):
+            input_list[k]=lefthalf[i]
+            i=i+1
+            k=k+1
+
+        while j < len(righthalf):
+            input_list[k]=righthalf[j]
+            j=j+1
+            k=k+1
 
 def main():
     # import sys
@@ -68,8 +119,11 @@ def main():
     # print selection_sort([1,2])
 
     # print selection_sort([5, 1, 4, 2, 8])
-    print(insertion_sort([54,26,93,17,77,31,44,55,20]))
+    # print(insertion_sort([54,26,93,17,77,31,44,55,20]))
     # print is_sorted_ascending(selection_sort([5, 1, 4, 2, 8]))
+    # inputlist = [54,26,93,17,77,31,44,55,20]
+    # mergeSort(alist)
+    # print(alist)
 
 
 if __name__ == '__main__':
