@@ -79,37 +79,38 @@ def counting_sort(input_list, max_val):
 
     return sorted_list
 
+def merge(left, right, input_list):
+    i,j,k = 0,0,0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            input_list[k]=left[i]
+            i += 1
+        else:
+            input_list[k]=right[j]
+            j += 1
+        k=k+1
+
+    while i < len(left):
+        input_list[k]=left[i]
+        i += 1
+        k += 1
+
+    while j < len(right):
+        input_list[k]=right[j]
+        j += 1
+        k += 1
+    return input_list
+
+
 def mergeSort(input_list):
-    if len(input_list)>1:
 
-        mid = len(input_list)//2
-        lefthalf = input_list[:mid]
-        righthalf = input_list[mid:]
+    if len(input_list) <= 1:
+        return input_list
+    mid = len(input_list) // 2
 
-        mergeSort(lefthalf)
-        mergeSort(righthalf)
-
-        i=0
-        j=0
-        k=0
-        while i < len(lefthalf) and j < len(righthalf):
-            if lefthalf[i] < righthalf[j]:
-                input_list[k]=lefthalf[i]
-                i=i+1
-            else:
-                input_list[k]=righthalf[j]
-                j=j+1
-            k=k+1
-
-        while i < len(lefthalf):
-            input_list[k]=lefthalf[i]
-            i=i+1
-            k=k+1
-
-        while j < len(righthalf):
-            input_list[k]=righthalf[j]
-            j=j+1
-            k=k+1
+    list_1 = mergeSort(input_list[:mid]) #left
+    list_2 = mergeSort(input_list[mid:]) #right
+    return merge(list_1, list_2, input_list)
 
 def main():
     # import sys
@@ -122,8 +123,12 @@ def main():
     # print(insertion_sort([54,26,93,17,77,31,44,55,20]))
     # print is_sorted_ascending(selection_sort([5, 1, 4, 2, 8]))
     # inputlist = [54,26,93,17,77,31,44,55,20]
-    # mergeSort(alist)
-    # print(alist)
+    inputlist = [6,7,9,10,1,2,3]
+    mergeSort(inputlist)
+    print(mergeSort(inputlist))
+    # input_one = [1,2,3]
+    # input_two = [4, 6, 7]
+    # print(merge(input_one, input_two))
 
 
 if __name__ == '__main__':
