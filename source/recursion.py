@@ -36,9 +36,6 @@ def factorial_recursive(n):
         # call function recursively
         return n * factorial_recursive(n - 1)
 
-
-<<<<<<< HEAD
-=======
 def fibonacci(n):
     """fibonacci(n) returns the n-th number in the Fibonacci sequence,
     which is defined with the recurrence relation:
@@ -77,7 +74,6 @@ def fibonacci_dynamic(n):
     pass
     # once implemented, change fibonacci (above) to call fibonacci_dynamic
     # to verify that your dynamic implementation passes all test cases
->>>>>>> 450d59a3fa0c0e876c693316f927819718ec521b
 
 
 def main():
